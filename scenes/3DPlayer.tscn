@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckm1v3wtv5sg1"]
+
+[ext_resource type="PackedScene" uid="uid://fxue138sgp1l" path="res://assets/3d/character/fox.glb" id="1_fkrmk"]
+[ext_resource type="Script" path="res://scripts/3DPlayer/Player.gd" id="1_hdaet"]
+[ext_resource type="Script" path="res://assets/3d/character/fox.gd" id="3_0e7k3"]
+[ext_resource type="Script" path="res://scripts/3DPlayer/CameraJoint.gd" id="3_5odts"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dhdef"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_hdaet")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_dhdef")
+
+[node name="Character" parent="." instance=ExtResource("1_fkrmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.025)
+script = ExtResource("3_0e7k3")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+spring_length = 7.0
+margin = 0.2
+script = ExtResource("3_5odts")
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+current = true
