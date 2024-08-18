@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://duvspms06ixb0"]
+[gd_scene load_steps=7 format=3 uid="uid://duvspms06ixb0"]
 
 [ext_resource type="PackedScene" uid="uid://ckm1v3wtv5sg1" path="res://scenes/3d/objects/player/3DPlayer.tscn" id="1_q4uwl"]
 [ext_resource type="PackedScene" uid="uid://degsn5q1a47v6" path="res://scenes/3d/levels/rooms/small-room-3opening-1door.tscn" id="1_w3ahi"]
+[ext_resource type="PackedScene" uid="uid://dm1v17rkc1kna" path="res://scenes/3d/levels/rooms/entrance/entrance-1.tscn" id="2_u8a07"]
+[ext_resource type="PackedScene" uid="uid://mwnrvjsfvw10" path="res://scenes/3d/levels/rooms/small-room-staircase-open.tscn" id="3_ur3ko"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_76iom"]
 size = Vector3(60, 2, 60)
@@ -23,8 +25,14 @@ mesh = SubResource("BoxMesh_bnuag")
 [node name="Small-room-3Opening-1Door" parent="." instance=ExtResource("1_w3ahi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
 
+[node name="Entrance-1" parent="." instance=ExtResource("2_u8a07")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.19676, 0, -1.97194)
+
+[node name="Small-room-3Opening-1Door2" parent="." instance=ExtResource("3_ur3ko")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -12, 0, -10)
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.132135, 0.991232, 0, -0.991232, -0.132135, 0, 6.50758, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_q4uwl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47301, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47301, 10)

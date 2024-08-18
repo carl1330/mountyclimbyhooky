@@ -1,0 +1,34 @@
+[gd_scene load_steps=9 format=3 uid="uid://crnj7k0nw34jv"]
+
+[ext_resource type="Texture2D" uid="uid://dg17d1lxj8c52" path="res://assets/3d/levels/textures/StoneTiles-M.png" id="1_d4730"]
+[ext_resource type="Texture2D" uid="uid://d4bqoyvl3kkwt" path="res://assets/3d/levels/textures/grey-dungeon-atlas-texture.png" id="1_qb6yl"]
+[ext_resource type="PackedScene" uid="uid://buvfugam8hupg" path="res://scenes/3d/objects/levels/foundation-square-4.tscn" id="2_3kp57"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_ngm63"]
+
+[sub_resource type="Skin" id="Skin_mxyti"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1tlku"]
+albedo_texture = ExtResource("1_d4730")
+
+[sub_resource type="BoxMesh" id="BoxMesh_leu03"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dd8v8"]
+albedo_texture = ExtResource("1_qb6yl")
+
+[node name="Roof-small" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(9, 0, 0, 0, 3, 0, 0, 0, 9, 3, 3.47642, -3)
+mesh = SubResource("PrismMesh_ngm63")
+skin = SubResource("Skin_mxyti")
+surface_material_override/0 = SubResource("StandardMaterial3D_1tlku")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(9, 0, 0, 0, 0.25, 0, 0, 0, 9.5, 3, 2, -3)
+mesh = SubResource("BoxMesh_leu03")
+surface_material_override/0 = SubResource("StandardMaterial3D_dd8v8")
+
+[node name="Foundation-square-4" parent="." instance=ExtResource("2_3kp57")]
+
+[node name="Node3D" type="Node3D" parent="."]

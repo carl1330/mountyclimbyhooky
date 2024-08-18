@@ -1,0 +1,108 @@
+[gd_scene load_steps=10 format=3 uid="uid://ct0mpm5kto7o7"]
+
+[ext_resource type="Script" path="res://scripts/3d/levels/rooms/small_room_3opening_1door.gd" id="1_wmufa"]
+[ext_resource type="PackedScene" uid="uid://ckbkr2xujfug6" path="res://assets/3d/levels/gltf/floor_foundation_corner.gltf" id="2_xm5ye"]
+[ext_resource type="PackedScene" uid="uid://cwahd6fmbnwg8" path="res://assets/3d/levels/gltf/floor_foundation_front.gltf" id="3_a5qlf"]
+[ext_resource type="PackedScene" uid="uid://ciqmurtks2w41" path="res://scenes/3d/objects/levels/wood-walls/wall-corner-scaffold.tscn" id="4_my2xm"]
+[ext_resource type="PackedScene" uid="uid://b2yb68opurws4" path="res://scenes/3d/objects/levels/wall.tscn" id="5_fsp33"]
+[ext_resource type="PackedScene" uid="uid://c58ijenwrq24c" path="res://scenes/3d/objects/levels/wall-half.tscn" id="6_e20uq"]
+[ext_resource type="PackedScene" uid="uid://cooy0r66qg50u" path="res://scenes/3d/objects/levels/wood-walls/wall-window-scaffold.tscn" id="7_e8lbw"]
+[ext_resource type="PackedScene" uid="uid://bv0aycsghuvur" path="res://scenes/3d/objects/levels/floors/floor-large-wood-dark.tscn" id="7_ml4py"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e17ii"]
+size = Vector3(8.18958, 1.98706, 9.01416)
+
+[node name="Small-room-3Opening-1Door" type="Node3D"]
+script = ExtResource("1_wmufa")
+
+[node name="foundation" type="StaticBody3D" parent="."]
+
+[node name="Pieces" type="Node3D" parent="foundation"]
+
+[node name="floor_foundation_corner2" parent="foundation/Pieces" instance=ExtResource("2_xm5ye")]
+
+[node name="floor_foundation_front2" parent="foundation/Pieces" instance=ExtResource("3_a5qlf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="floor_foundation_front3" parent="foundation/Pieces" instance=ExtResource("3_a5qlf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_foundation_corner5" parent="foundation/Pieces" instance=ExtResource("2_xm5ye")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6, 0, 0)
+
+[node name="floor_foundation_corner4" parent="foundation/Pieces" instance=ExtResource("2_xm5ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="floor_foundation_front5" parent="foundation/Pieces" instance=ExtResource("3_a5qlf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="floor_foundation_front6" parent="foundation/Pieces" instance=ExtResource("3_a5qlf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
+
+[node name="floor_foundation_front7" parent="foundation/Pieces" instance=ExtResource("3_a5qlf")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6, 0, -2)
+
+[node name="floor_foundation_corner6" parent="foundation/Pieces" instance=ExtResource("2_xm5ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="floor_foundation_front8" parent="foundation/Pieces" instance=ExtResource("3_a5qlf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+
+[node name="floor_foundation_front9" parent="foundation/Pieces" instance=ExtResource("3_a5qlf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+
+[node name="floor_foundation_front10" parent="foundation/Pieces" instance=ExtResource("3_a5qlf")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6, 0, -4)
+
+[node name="floor_foundation_corner8" parent="foundation/Pieces" instance=ExtResource("2_xm5ye")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -6)
+
+[node name="floor_foundation_front11" parent="foundation/Pieces" instance=ExtResource("3_a5qlf")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, -6)
+
+[node name="floor_foundation_front12" parent="foundation/Pieces" instance=ExtResource("3_a5qlf")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, -6)
+
+[node name="floor_foundation_corner9" parent="foundation/Pieces" instance=ExtResource("2_xm5ye")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, -6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="foundation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.01813, 0.966919, -2.99146)
+shape = SubResource("BoxShape3D_e17ii")
+
+[node name="walls" type="Node3D" parent="."]
+
+[node name="Wall-corner-scaffold" parent="walls" instance=ExtResource("4_my2xm")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 2, 1)
+
+[node name="Wall-corner-scaffold2" parent="walls" instance=ExtResource("4_my2xm")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 7, 2, 1)
+
+[node name="Wall" parent="walls" instance=ExtResource("5_fsp33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, 1)
+
+[node name="Wall-half" parent="walls" instance=ExtResource("6_e20uq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 2, -5)
+
+[node name="Wall-half2" parent="walls" instance=ExtResource("6_e20uq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 2, -5)
+
+[node name="Wall-window-scaffold" parent="walls" instance=ExtResource("7_e8lbw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 2, -3)
+
+[node name="Wall-window-scaffold2" parent="walls" instance=ExtResource("7_e8lbw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 2, -3)
+
+[node name="floor" type="Node3D" parent="."]
+
+[node name="Floor-large-wood-dark" parent="floor" instance=ExtResource("7_ml4py")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, -1)
+
+[node name="Floor-large-wood-dark2" parent="floor" instance=ExtResource("7_ml4py")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -1)
+
+[node name="Floor-large-wood-dark3" parent="floor" instance=ExtResource("7_ml4py")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -5)
+
+[node name="Floor-large-wood-dark4" parent="floor" instance=ExtResource("7_ml4py")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, -5)

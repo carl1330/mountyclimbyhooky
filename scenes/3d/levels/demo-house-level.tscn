@@ -1,3 +1,62 @@
-[gd_scene format=3 uid="uid://dx4tkbs3cieq3"]
+[gd_scene load_steps=13 format=3 uid="uid://dx4tkbs3cieq3"]
+
+[ext_resource type="Texture2D" uid="uid://ccc27ec6fuljy" path="res://assets/3d/levels/textures/FoliageGrass-B.png" id="1_unvt6"]
+[ext_resource type="PackedScene" uid="uid://ckm1v3wtv5sg1" path="res://scenes/3d/objects/player/3DPlayer.tscn" id="2_xiqcj"]
+[ext_resource type="Texture2D" uid="uid://3kqjdpq81xr0" path="res://assets/3d/levels/textures/PurplyBlueSky.png" id="3_tors0"]
+[ext_resource type="PackedScene" uid="uid://dm1v17rkc1kna" path="res://scenes/3d/levels/rooms/entrance/entrance-1.tscn" id="4_fsuif"]
+[ext_resource type="PackedScene" uid="uid://degsn5q1a47v6" path="res://scenes/3d/levels/rooms/small-room-3opening-1door.tscn" id="5_w5tc1"]
+[ext_resource type="PackedScene" uid="uid://ugc2xu8l4dyc" path="res://scenes/3d/levels/rooms/small-room-edge.tscn" id="6_tlpcf"]
+[ext_resource type="PackedScene" uid="uid://ct0mpm5kto7o7" path="res://scenes/3d/levels/wood-room/small-wood-room-edge.tscn" id="7_h5to8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fqh28"]
+size = Vector3(51, 0.002, 51)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nraoq"]
+albedo_texture = ExtResource("1_unvt6")
+uv1_triplanar = true
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tmh11"]
+panorama = ExtResource("3_tors0")
+
+[sub_resource type="Sky" id="Sky_c87ts"]
+sky_material = SubResource("PanoramaSkyMaterial_tmh11")
+
+[sub_resource type="Environment" id="Environment_tfaxg"]
+background_mode = 2
+sky = SubResource("Sky_c87ts")
 
 [node name="Demo-house-level" type="Area3D"]
+
+[node name="Ground" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+shape = SubResource("BoxShape3D_fqh28")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Ground"]
+size = Vector3(50, 0.002, 50)
+material = SubResource("StandardMaterial3D_nraoq")
+
+[node name="Player" parent="." instance=ExtResource("2_xiqcj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tfaxg")
+
+[node name="House" type="Node3D" parent="."]
+
+[node name="Entrance-1" parent="House" instance=ExtResource("4_fsuif")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.05145, 0, -2.97194)
+
+[node name="Small-room-3Opening-1Door" parent="House" instance=ExtResource("5_w5tc1")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.07376, 0, -11)
+
+[node name="Small-room-3Opening-1Door2" parent="House" instance=ExtResource("6_tlpcf")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -11, 0, -11)
+
+[node name="Small-room-3Opening-1Door3" parent="House" instance=ExtResource("7_h5to8")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3, 0, -19)
+
+[node name="Small-room-3Opening-1Door4" parent="House" instance=ExtResource("6_tlpcf")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11, 0, -5)
