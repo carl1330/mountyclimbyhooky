@@ -34,5 +34,14 @@ func _physics_process(delta: float) -> void:
 		anim.play("UpR")
 	if velocity.y > 0:
 		anim.play("DownR")
+		
+	var collision = get_last_slide_collision()
+	if collision != null:
+		handle_movement_collision(collision)
 
 	move_and_slide()
+
+func handle_movement_collision(collision: KinematicCollision2D):
+	var collider = collision.get_collider()
+	if collider is LockPin:
+		collider.go_up()
