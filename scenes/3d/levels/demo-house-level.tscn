@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://dx4tkbs3cieq3"]
+[gd_scene load_steps=18 format=3 uid="uid://dx4tkbs3cieq3"]
 
+[ext_resource type="Script" path="res://scripts/3d/levels/demo_house_level.gd" id="1_f4g5g"]
 [ext_resource type="Texture2D" uid="uid://ccc27ec6fuljy" path="res://assets/3d/levels/textures/FoliageGrass-B.png" id="1_unvt6"]
 [ext_resource type="PackedScene" uid="uid://ckm1v3wtv5sg1" path="res://scenes/3d/objects/player/3DPlayer.tscn" id="2_xiqcj"]
 [ext_resource type="Texture2D" uid="uid://3kqjdpq81xr0" path="res://assets/3d/levels/textures/PurplyBlueSky.png" id="3_tors0"]
@@ -7,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://degsn5q1a47v6" path="res://scenes/3d/levels/rooms/small-room-3opening-1door.tscn" id="5_w5tc1"]
 [ext_resource type="PackedScene" uid="uid://ugc2xu8l4dyc" path="res://scenes/3d/levels/rooms/small-room-edge.tscn" id="6_tlpcf"]
 [ext_resource type="PackedScene" uid="uid://ct0mpm5kto7o7" path="res://scenes/3d/levels/wood-room/small-wood-room-edge.tscn" id="7_h5to8"]
+[ext_resource type="PackedScene" uid="uid://crnj7k0nw34jv" path="res://scenes/3d/levels/rooms/roofs/roof-small.tscn" id="8_qjld5"]
+[ext_resource type="PackedScene" uid="uid://dtn8cwxfugkcq" path="res://scenes/3d/objects/levels/decor/chest.tscn" id="9_1qd45"]
+[ext_resource type="PackedScene" uid="uid://c0rulljic5e5u" path="res://scenes/3d/objects/levels/decor/torch-mounted.tscn" id="9_t7oha"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fqh28"]
 size = Vector3(51, 0.002, 51)
@@ -25,7 +29,10 @@ sky_material = SubResource("PanoramaSkyMaterial_tmh11")
 background_mode = 2
 sky = SubResource("Sky_c87ts")
 
-[node name="Demo-house-level" type="Area3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_10mmx"]
+
+[node name="Demo-house-level" type="Node3D"]
+script = ExtResource("1_f4g5g")
 
 [node name="Ground" type="Node3D" parent="."]
 
@@ -38,25 +45,88 @@ shape = SubResource("BoxShape3D_fqh28")
 size = Vector3(50, 0.002, 50)
 material = SubResource("StandardMaterial3D_nraoq")
 
+[node name="House" type="Node3D" parent="."]
+
+[node name="Structure" type="Node3D" parent="House"]
+
+[node name="entrance" type="Node3D" parent="House/Structure"]
+
+[node name="Entrance-1" parent="House/Structure/entrance" instance=ExtResource("4_fsuif")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.05145, 0, -2.97194)
+
+[node name="Torch-mounted" parent="House/Structure/entrance" instance=ExtResource("9_t7oha")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.50056, -3.74472)
+
+[node name="Torch-mounted2" parent="House/Structure/entrance" instance=ExtResource("9_t7oha")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.27257, 3.50056, -3.74472)
+
+[node name="Roof-small" parent="House/Structure" instance=ExtResource("8_qjld5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 6, -5)
+
+[node name="Roof-small4" parent="House/Structure" instance=ExtResource("8_qjld5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 6, -13)
+
+[node name="Roof-small3" parent="House/Structure" instance=ExtResource("8_qjld5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 6, -5)
+
+[node name="Roof-small2" parent="House/Structure" instance=ExtResource("8_qjld5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 6, -5)
+
+[node name="EntryRoom" type="Node3D" parent="House/Structure"]
+
+[node name="Torch-mounted3" parent="House/Structure/EntryRoom" instance=ExtResource("9_t7oha")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.27257, 3.50056, -4.2752)
+
+[node name="Torch-mounted4" parent="House/Structure/EntryRoom" instance=ExtResource("9_t7oha")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.14546, 3.50056, -4.2752)
+
+[node name="entry-room" parent="House/Structure/EntryRoom" instance=ExtResource("5_w5tc1")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.07376, 0, -11)
+
+[node name="ChestRoom" type="Node3D" parent="House/Structure"]
+
+[node name="Small-room-3Opening-1Door3" parent="House/Structure/ChestRoom" instance=ExtResource("7_h5to8")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3, 0, -19)
+
+[node name="Torch-mounted5" parent="House/Structure/ChestRoom" instance=ExtResource("9_t7oha")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0352051, 3.50056, -19.7577)
+
+[node name="Chest" parent="House/Structure/ChestRoom" instance=ExtResource("9_1qd45")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -1.86149, 2, -18.0298)
+
+[node name="Rightroom" type="Node3D" parent="House/Structure"]
+
+[node name="Torch-mounted6" parent="House/Structure/Rightroom" instance=ExtResource("9_t7oha")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.4603, 3.50056, -4.2752)
+
+[node name="Small-room-3Opening-1Door4" parent="House/Structure/Rightroom" instance=ExtResource("6_tlpcf")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11, 0, -5)
+
+[node name="LeftRoom" type="Node3D" parent="House/Structure"]
+
+[node name="Small-room-3Opening-1Door2" parent="House/Structure/LeftRoom" instance=ExtResource("6_tlpcf")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -11, 0, -11)
+
+[node name="Torch-mounted7" parent="House/Structure/LeftRoom" instance=ExtResource("9_t7oha")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.89635, 3.50056, -4.2752)
+
 [node name="Player" parent="." instance=ExtResource("2_xiqcj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_tfaxg")
 
-[node name="House" type="Node3D" parent="."]
+[node name="OpenDoorArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.76673, -1.64213)
 
-[node name="Entrance-1" parent="House" instance=ExtResource("4_fsuif")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.05145, 0, -2.97194)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OpenDoorArea"]
+shape = SubResource("BoxShape3D_10mmx")
 
-[node name="Small-room-3Opening-1Door" parent="House" instance=ExtResource("5_w5tc1")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.07376, 0, -11)
+[node name="OpenChestArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.76673, -16.2581)
 
-[node name="Small-room-3Opening-1Door2" parent="House" instance=ExtResource("6_tlpcf")]
-transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -11, 0, -11)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OpenChestArea"]
+shape = SubResource("BoxShape3D_10mmx")
 
-[node name="Small-room-3Opening-1Door3" parent="House" instance=ExtResource("7_h5to8")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3, 0, -19)
-
-[node name="Small-room-3Opening-1Door4" parent="House" instance=ExtResource("6_tlpcf")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11, 0, -5)
+[connection signal="body_entered" from="OpenDoorArea" to="House/Structure/EntryRoom/entry-room" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="OpenChestArea" to="." method="_on_open_chest_area_body_entered"]
