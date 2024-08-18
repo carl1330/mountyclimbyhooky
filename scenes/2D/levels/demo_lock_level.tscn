@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://crwly5wtxkcdk"]
 
-[ext_resource type="Script" path="res://scripts/2D/level/lock_level_1.gd" id="1_0ommx"]
+[ext_resource type="Script" path="res://scripts/2D/level/demo-lock-level.gd" id="1_0ommx"]
 [ext_resource type="PackedScene" uid="uid://blrxlnpw1h28u" path="res://scenes/2D/2DPlayer.tscn" id="2_1nhb7"]
 [ext_resource type="Texture2D" uid="uid://crfxn8j1j8lqk" path="res://assets/2d/level/industrial_tile_set.png" id="3_ppaj0"]
 [ext_resource type="PackedScene" uid="uid://cy0p7i8vrm3ky" path="res://scenes/2D/objects/lock-pin-animated.tscn" id="4_jc2qq"]
@@ -169,7 +169,7 @@ texture = ExtResource("3_ppaj0")
 11:7/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_xboot"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
 sources/1 = SubResource("TileSetAtlasSource_lw2fk")
 
 [node name="Level" type="Node2D"]
