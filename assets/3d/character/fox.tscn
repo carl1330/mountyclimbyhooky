@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0n8f2hn8cyqe"]
+
+[ext_resource type="PackedScene" uid="uid://fxue138sgp1l" path="res://assets/3d/character/fox.glb" id="1_107aj"]
+
+[node name="fox" instance=ExtResource("1_107aj")]
+
+[node name="Skeleton3D" parent="IdleDemo" index="0"]
+bones/4/rotation = Quaternion(0.0132682, -3.52218e-08, 1.1848e-08, 0.999912)
+bones/5/rotation = Quaternion(-0.0132681, 9.09769e-08, -1.25879e-08, 0.999912)
+bones/8/rotation = Quaternion(-0.336276, -0.498575, -0.186936, 0.776786)
+bones/9/rotation = Quaternion(-1.99838e-08, -1.7498e-07, -0.0586679, 0.998278)
+bones/9/scale = Vector3(1, 1, 1)
+bones/10/rotation = Quaternion(0.707107, -1.94178e-08, -2.14119e-08, 0.707107)
+bones/13/rotation = Quaternion(-0.088387, 0.189975, 0.371344, 0.904545)
+bones/13/scale = Vector3(1, 1, 1)
+bones/15/rotation = Quaternion(-3.35246e-07, 1.64139e-07, 0.0586679, 0.998278)
+bones/15/scale = Vector3(1, 1, 1)
+bones/18/rotation = Quaternion(-0.716426, 3.34402e-08, 1.66805e-08, 0.697663)
+bones/22/rotation = Quaternion(0.999912, -1.19221e-08, -4.08117e-08, 0.0132704)
+bones/23/scale = Vector3(1, 1, 1)
+bones/25/rotation = Quaternion(-0.0672776, 7.81192e-08, -3.37373e-08, 0.997734)
+bones/25/scale = Vector3(1, 1, 1)

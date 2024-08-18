@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="JumpState" load_steps=2 format=3 uid="uid://gp5btejfyjgh"]
+
+[ext_resource type="Script" path="res://scripts/3d/player/jump_state.gd" id="1_e4xlr"]
+
+[resource]
+script = ExtResource("1_e4xlr")
+id = 0
+jump_height = 3.0
+apex_duration = 0.5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://blrxlnpw1h28u"]
+[gd_scene load_steps=45 format=3 uid="uid://dnlfltn5cbw2d"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_cd2id"]
 [ext_resource type="Texture2D" uid="uid://eagg8pdpy8kl" path="res://assets/2d/DownL/tile056.png" id="2_j37jb"]
