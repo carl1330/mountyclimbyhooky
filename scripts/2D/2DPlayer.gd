@@ -44,4 +44,6 @@ func _physics_process(delta: float) -> void:
 func handle_movement_collision(collision: KinematicCollision2D):
 	var collider = collision.get_collider()
 	if collider is LockPin:
-		collider.go_up()
+		var normal = collision.get_normal()
+		if normal == Vector2(0, 1):
+			collider.go_up()
