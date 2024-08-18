@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://duvspms06ixb0"]
+[gd_scene load_steps=5 format=3 uid="uid://duvspms06ixb0"]
 
 [ext_resource type="PackedScene" uid="uid://ckm1v3wtv5sg1" path="res://scenes/3d/objects/player/3DPlayer.tscn" id="1_q4uwl"]
+[ext_resource type="PackedScene" uid="uid://degsn5q1a47v6" path="res://scenes/3d/levels/rooms/small-room-3opening-1door.tscn" id="1_w3ahi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_76iom"]
 size = Vector3(60, 2, 60)
@@ -18,6 +19,9 @@ shape = SubResource("BoxShape3D_76iom")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("BoxMesh_bnuag")
+
+[node name="Small-room-3Opening-1Door" parent="." instance=ExtResource("1_w3ahi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.132135, 0.991232, 0, -0.991232, -0.132135, 0, 6.50758, 0)
