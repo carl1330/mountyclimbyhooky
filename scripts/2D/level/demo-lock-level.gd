@@ -6,24 +6,25 @@
 extends Node2D
 
 var PINCOUNT = 4
-var PINS: Array
+var PINS: Array = []
 var PUSHED = 0
 
-func handle_lockpin_event(lockPin):
+func handle_lockpin_event():
 	PUSHED += 1
 	if PUSHED == PINCOUNT:
-		print("Level succeeded")
+		$UI/LevelSuccessPlayer.play("level-success-popup")
+			
 		
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var children = self.get_children()
-	
-	for child in children:
+	var platform1 = $"Environment/Pins"
+	for child in platform1.get_children():
 		if child is LockPin:
 			PINS.append(child)
 			child.connect("was_pushed", handle_lockpin_event)
 
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+# Fade out
+func _on_level_success_player_animation_finished(anim_name: StringName) -> void:
+	$FadeOut/FadeOutPlayer.play("fade-out")

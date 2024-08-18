@@ -18,4 +18,4 @@ func go_up():
 		slide_tween.tween_property(self, "position", position + Vector2(0, -15), .4)
 		IS_PUSHED = true
 		
-		was_pushed.emit(self)
+		was_pushed.emit()
