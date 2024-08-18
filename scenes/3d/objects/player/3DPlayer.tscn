@@ -1,27 +1,166 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckm1v3wtv5sg1"]
+[gd_scene load_steps=20 format=3 uid="uid://ckm1v3wtv5sg1"]
 
-[ext_resource type="PackedScene" uid="uid://fxue138sgp1l" path="res://assets/3d/character/fox.glb" id="1_fkrmk"]
-[ext_resource type="Script" path="res://scripts/3DPlayer/Player.gd" id="1_hdaet"]
-[ext_resource type="Script" path="res://assets/3d/character/fox.gd" id="3_0e7k3"]
-[ext_resource type="Script" path="res://scripts/3DPlayer/CameraJoint.gd" id="3_5odts"]
+[ext_resource type="Script" path="res://scripts/3d/player/player.gd" id="1_d76c7"]
+[ext_resource type="PackedScene" uid="uid://c0n8f2hn8cyqe" path="res://assets/3d/character/fox.tscn" id="1_npvt4"]
+[ext_resource type="Resource" uid="uid://bpfgexn2kxeae" path="res://scenes/3d/objects/player/MovementStates/idle.tres" id="2_7075m"]
+[ext_resource type="Script" path="res://scripts/3d/player/camera_controller.gd" id="2_o2mcn"]
+[ext_resource type="Resource" uid="uid://bdykns4f2htay" path="res://scenes/3d/objects/player/MovementStates/run.tres" id="3_mkhp2"]
+[ext_resource type="Script" path="res://scripts/3d/player/movement_controller.gd" id="3_p1y2p"]
+[ext_resource type="Resource" uid="uid://bmmuwlk0kknk7" path="res://scenes/3d/objects/player/MovementStates/crouch.tres" id="4_bipf5"]
+[ext_resource type="Resource" uid="uid://gp5btejfyjgh" path="res://scenes/3d/objects/player/MovementStates/jump.tres" id="5_1wsf7"]
+[ext_resource type="Script" path="res://scripts/3d/player/animation_controller.gd" id="5_hhxhf"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dhdef"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t8y3y"]
+height = 1.4
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_66fd1"]
+animation = &"Fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3obr3"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_rrmss"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_hwwbp"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3ra53"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p1hff"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_1bl8p"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_3ra53")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_p1hff")
+blend_point_1/pos = 1.0
+min_space = 0.0
+snap = 1.0
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_u6eu5"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_cyhiq"]
+graph_offset = Vector2(-301.893, -61.7278)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_3obr3")
+nodes/Animation/position = Vector2(420, 220)
+"nodes/Animation 1/node" = SubResource("AnimationNodeAnimation_66fd1")
+"nodes/Animation 1/position" = Vector2(-160, -80)
+nodes/jump/node = SubResource("AnimationNodeOneShot_rrmss")
+nodes/jump/position = Vector2(420, -20)
+nodes/movement_anim_speed/node = SubResource("AnimationNodeTimeScale_hwwbp")
+nodes/movement_anim_speed/position = Vector2(-40, 120)
+nodes/movement_blend/node = SubResource("AnimationNodeBlendSpace1D_1bl8p")
+nodes/movement_blend/position = Vector2(-260, 120)
+nodes/on_floor_blend/node = SubResource("AnimationNodeBlend2_u6eu5")
+nodes/on_floor_blend/position = Vector2(200, -60)
+nodes/output/position = Vector2(620, 20)
+node_connections = [&"jump", 0, &"on_floor_blend", &"jump", 1, &"Animation", &"movement_anim_speed", 0, &"movement_blend", &"on_floor_blend", 0, &"Animation 1", &"on_floor_blend", 1, &"movement_anim_speed", &"output", 0, &"jump"]
 
 [node name="Player" type="CharacterBody3D"]
-script = ExtResource("1_hdaet")
+script = ExtResource("1_d76c7")
+movement_states = {
+"crouch": ExtResource("4_bipf5"),
+"idle": ExtResource("2_7075m"),
+"run": ExtResource("3_mkhp2")
+}
+jump_states = {
+"jump": ExtResource("5_1wsf7")
+}
+
+[node name="MovementController" type="Node3D" parent="." node_paths=PackedStringArray("player", "mesh_root")]
+script = ExtResource("3_p1y2p")
+player = NodePath("..")
+mesh_root = NodePath("../MeshRoot")
+
+[node name="AnimationController" type="Node3D" parent="." node_paths=PackedStringArray("animation_tree", "player")]
+script = ExtResource("5_hhxhf")
+animation_tree = NodePath("../MeshRoot/AnimationTree")
+player = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_dhdef")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+shape = SubResource("CapsuleShape3D_t8y3y")
 
-[node name="Character" parent="." instance=ExtResource("1_fkrmk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.025)
-script = ExtResource("3_0e7k3")
+[node name="MeshRoot" type="Node3D" parent="."]
 
-[node name="SpringArm3D" type="SpringArm3D" parent="."]
-spring_length = 7.0
-margin = 0.2
-script = ExtResource("3_5odts")
+[node name="fox" parent="MeshRoot" instance=ExtResource("1_npvt4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
-current = true
+[node name="Skeleton3D" parent="MeshRoot/fox/IdleDemo" index="0"]
+bones/0/position = Vector3(0.119619, 0.0481787, -0.0179161)
+bones/0/rotation = Quaternion(0.248606, 0.660775, 0.663536, -0.247571)
+bones/1/position = Vector3(-1.36261e-05, 1.58062e-06, 3.25277e-05)
+bones/2/rotation = Quaternion(0, 0, 1, 1.48674e-08)
+bones/3/rotation = Quaternion(0, 0, 1, 1.48674e-08)
+bones/4/position = Vector3(2.33434e-09, 0.398771, -0.000508216)
+bones/4/rotation = Quaternion(0.104171, 0.169029, -0.0169584, 0.979944)
+bones/5/rotation = Quaternion(-0.0546484, -8.00428e-06, -8.92704e-05, 0.998506)
+bones/5/scale = Vector3(1, 0.999956, 1)
+bones/6/rotation = Quaternion(-0.480264, -5.78107e-08, 1.40428e-08, 0.877124)
+bones/8/rotation = Quaternion(-0.645316, -0.125494, -0.205001, 0.725116)
+bones/9/rotation = Quaternion(-1.51808e-06, -9.54891e-08, -0.575558, 0.817761)
+bones/10/rotation = Quaternion(0.696664, 0.054166, 0.319693, 0.639939)
+bones/11/position = Vector3(0.327751, -0.0840101, -0.00446462)
+bones/11/rotation = Quaternion(-0.766566, -0.13156, -0.107506, 0.619283)
+bones/12/position = Vector3(0.291525, 0.000448218, -0.236136)
+bones/12/rotation = Quaternion(-0.766567, -0.131555, -0.107501, 0.619284)
+bones/14/rotation = Quaternion(-0.672439, 0.460421, 0.267934, 0.513858)
+bones/15/rotation = Quaternion(-1.8709e-06, 2.03186e-07, 0.442909, 0.896567)
+bones/16/position = Vector3(-0.358682, -0.0469596, 0.128686)
+bones/16/rotation = Quaternion(-0.766565, -0.131565, -0.107509, 0.619282)
+bones/17/position = Vector3(-0.285906, -0.137856, -0.165137)
+bones/17/rotation = Quaternion(-0.766567, -0.131555, -0.107501, 0.619284)
+bones/18/rotation = Quaternion(-0.659276, -0.000128432, -0.000102014, 0.751901)
+bones/19/rotation = Quaternion(0.103123, 7.18906e-10, -1.05312e-08, 0.994669)
+bones/20/rotation = Quaternion(0.0605075, 3.50227e-09, -9.96253e-10, 0.998168)
+bones/21/rotation = Quaternion(0.174261, -8.78457e-10, -7.36924e-09, 0.9847)
+bones/22/position = Vector3(2.32802e-09, -0.0290946, 0.00625443)
+bones/22/rotation = Quaternion(0.979942, 0.017009, 0.169051, 0.104146)
+bones/22/scale = Vector3(0.963821, 0.963758, 0.963321)
+bones/23/rotation = Quaternion(-0.285717, -0.33965, -0.143858, 0.884482)
+bones/23/scale = Vector3(1.00015, 0.999977, 0.999842)
+bones/24/rotation = Quaternion(0.480152, 6.75782e-08, -2.05072e-07, 0.877185)
+bones/24/scale = Vector3(1, 0.999986, 1.00002)
+bones/25/rotation = Quaternion(-0.218427, 0.232659, 0.193002, 0.927852)
+bones/25/scale = Vector3(1.00008, 0.999968, 0.999928)
+bones/26/rotation = Quaternion(0.421262, -1.27545e-08, 1.83041e-07, 0.906939)
+bones/26/scale = Vector3(1, 0.999971, 1.00006)
+bones/27/position = Vector3(-0.162948, 0.0477269, -0.0513329)
+bones/27/rotation = Quaternion(-0.14061, 0.693447, 0.692484, 0.140806)
+bones/28/position = Vector3(2.64179e-06, 1.12189e-06, 3.99121e-05)
+
+[node name="AnimationTree" type="AnimationTree" parent="MeshRoot"]
+root_node = NodePath("../fox")
+tree_root = SubResource("AnimationNodeBlendTree_cyhiq")
+anim_player = NodePath("../fox/AnimationPlayer")
+parameters/jump/active = false
+parameters/jump/internal_active = false
+parameters/jump/request = 0
+parameters/movement_anim_speed/scale = 1.0
+parameters/movement_blend/blend_position = 0.00226757
+parameters/on_floor_blend/blend_amount = 1.0
+
+[node name="CamRoot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.927833, 0)
+script = ExtResource("2_o2mcn")
+
+[node name="CamYaw" type="Node3D" parent="CamRoot"]
+transform = Transform3D(0.999992, 0, 0.00404915, 0, 1, 0, -0.00404915, 0, 0.999992, 0, 0, 0)
+
+[node name="CamPitch" type="Node3D" parent="CamRoot/CamYaw"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CamRoot/CamYaw/CamPitch"]
+spring_length = 5.0
+margin = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="CamRoot/CamYaw/CamPitch/SpringArm3D"]
+transform = Transform3D(1, 0, -4.65661e-10, 0, 1, 0, 4.65661e-10, 0, 1, -0.0054727, 0.768027, 4.59722)
+
+[connection signal="pressed_jump" from="." to="MovementController" method="_jump"]
+[connection signal="pressed_jump" from="." to="AnimationController" method="_jump"]
+[connection signal="set_movement_direction" from="." to="MovementController" method="_on_set_movement_direction"]
+[connection signal="set_movement_state" from="." to="MovementController" method="_on_set_movement_state"]
+[connection signal="set_movement_state" from="." to="AnimationController" method="_on_set_movement_state"]
+[connection signal="set_cam_rotation" from="CamRoot" to="MovementController" method="_on_set_cam_rotation"]
+
+[editable path="MeshRoot/fox"]

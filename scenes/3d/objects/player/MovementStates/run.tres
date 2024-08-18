@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MovementState" load_steps=2 format=3 uid="uid://bdykns4f2htay"]
+
+[ext_resource type="Script" path="res://scripts/3d/player/movement_state.gd" id="1_dynl8"]
+
+[resource]
+script = ExtResource("1_dynl8")
+id = 1
+movement_speed = 10.0
+acceleration = 6.0
+animation_speed = 1.0
